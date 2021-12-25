@@ -29,26 +29,23 @@ print(f"No. of testing examples: {testing_data.shape[0]}")
 X_train,Y_train,X_test,Y_test=training_data['p/kg'],training_data['yms'],testing_data['p/kg'],testing_data['yms']
 
 
+# KNN classifer
+import numpy as np
 def euclidean_dist(X_test, X_train):
     num_test = X_test.shape[0]
     num_train = X_train.shape[0]
     dists = np.zeros((num_test, num_train))
-    # a = np.zeros(num_test)
-    # b = np.zeros(num_train)
-    # for i in range(num_test):
-    #     a[i] = np.dot(X_test[i], X_test[i])
-    # for j in range(num_train):
-    #     b[j] = np.dot(X_train[j], X_train[j])  
+     
     for i in range(num_test):
         for j in range(num_train):
-            # print('X_test[i]=',X_test.iloc[i],'X_train[j]=',X_train.iloc[j])
+            
             dists[i, j] = np.sqrt(np.square(X_test.iloc[i])+np.square(X_train.iloc[j]))
 
 
     return dists
-    # dists = np.add(np.sum(X_test ** 2, axis=1, keepdims=True), np.sum(X_train ** 2, axis=1, keepdims=True).T) - 2* X_test @ X_train.T
-    # return dists
 
+
+dicts=euclidean_dist(X_test,X_train)
 
 # [[ 8 10  1]
 #  [ 2  8  9]]
@@ -58,7 +55,7 @@ def euclidean_dist(X_test, X_train):
 # print(X_train.shape)
 
 my_dists = euclidean_dist(X_test, X_train)
-print(my_dists.shape)
+print(my_dists)
 
 # sorted_idx = np.argsort(my_dists,axis=1)
 # print(sorted_idx[0])
